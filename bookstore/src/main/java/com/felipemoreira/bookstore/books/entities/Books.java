@@ -4,8 +4,10 @@ import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import com.felipemoreira.bookstore.author.entities.Author;
+import com.felipemoreira.bookstore.entities.Auditable;
 import com.felipemoreira.bookstore.publisher.entities.Publisher;
 import com.felipemoreira.bookstore.user.entities.User;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +15,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "BOOKS")
-public class Books {
+public class Books extends Auditable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -43,4 +53,22 @@ public class Books {
 
     @ManyToOne(cascade = {MERGE})
     private User user;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(
+            o)) {
+            return false;
+        }
+        Books books = (Books) o;
+        return id != null && Objects.equals(id, books.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
