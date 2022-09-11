@@ -1,12 +1,10 @@
-package com.felipemoreira.bookstore.user.entities;
+package com.felipemoreira.bookstore.entities;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
-import com.felipemoreira.bookstore.books.entities.Books;
-import com.felipemoreira.bookstore.entities.Auditable;
-import com.felipemoreira.bookstore.user.domain.enums.Gender;
+import com.felipemoreira.bookstore.domain.enums.Gender;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
