@@ -1,6 +1,6 @@
-package com.felipemoreira.bookstore.publisher.repositories;
+package com.felipemoreira.bookstore.repositories;
 
-import com.felipemoreira.bookstore.publisher.entities.Publisher;
+import com.felipemoreira.bookstore.entities.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

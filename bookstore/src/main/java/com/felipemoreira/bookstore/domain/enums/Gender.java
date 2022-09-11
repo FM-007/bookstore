@@ -1,4 +1,4 @@
-package com.felipemoreira.bookstore.user.domain.enums;
+package com.felipemoreira.bookstore.domain.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,9 @@
-package com.felipemoreira.bookstore.publisher.entities;
+package com.felipemoreira.bookstore.entities;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
-import com.felipemoreira.bookstore.books.entities.Books;
+import com.felipemoreira.bookstore.entities.Books;
 import com.felipemoreira.bookstore.entities.Auditable;
 import java.time.LocalDate;
 import java.util.List;
