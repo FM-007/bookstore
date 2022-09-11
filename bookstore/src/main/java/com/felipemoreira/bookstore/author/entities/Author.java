@@ -4,6 +4,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import com.felipemoreira.bookstore.books.entities.Books;
+import com.felipemoreira.bookstore.entities.Auditable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "AUTHOR")
-public class Author {
+public class Author extends Auditable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
