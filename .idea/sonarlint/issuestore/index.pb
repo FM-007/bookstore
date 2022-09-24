@@ -1,9 +1,21 @@
 
-D
-bookstore/.gitignore,6\0\60f81fd45bc3959f58da182673e9e68cd08ccb54
-{
-Kbookstore/src/main/java/com/felipemoreira/bookstore/entities/Auditable.java,1\3\13e5b5ad9b5818ff0bb6736d85b2969c7e91aa76
 R
 "bookstore/pull_request_template.md,7\c\7c48c06f2e194fcc9ebf826263483f229abd6ac2
-x
-Hbookstore/src/main/java/com/felipemoreira/bookstore/entities/Author.java,1\6\1674cef452cfc4d651e026a153d2c4ab1582917c
+w
+Gbookstore/src/main/java/com/felipemoreira/bookstore/entities/Books.java,f\d\fdac2e879ae4a28b5c325c273311cd05605619a5
+†
+Vbookstore/src/main/java/com/felipemoreira/bookstore/repositories/AuthorRepository.java,a\4\a431b85f05a9c028a10fd118a53299f2ddc13a12
+–
+fbookstore/src/main/java/com/felipemoreira/bookstore/domain/exception/AuthorAlreadyExistsException.java,a\8\a88481e449169197c95b276c683667c50512b677
+„
+Tbookstore/src/main/java/com/felipemoreira/bookstore/utils/AuthorsControllerDocs.java,9\6\961c845637b5a426956fb970df4cef1104b36c80
+‚
+Rbookstore/src/test/java/com/felipemoreira/bookstore/utils/JsonConversionUtils.java,a\3\a3faf53b2428e219e0aba4d8d0b6ed8502e5734e
+D
+bookstore/.gitignore,6\0\60f81fd45bc3959f58da182673e9e68cd08ccb54
+|
+Lbookstore/src/test/java/com/felipemoreira/bookstore/helper/AuthorHelper.java,9\6\96a4f5fb537dbea4ac2339ca5dba7cfb0c0d099b
+ˆ
+Xbookstore/src/test/java/com/felipemoreira/bookstore/controller/AuthorControllerTest.java,e\1\e18fe366e358a812150d9cfa73a0025b38c6ae1c
+‚
+Rbookstore/src/test/java/com/felipemoreira/bookstore/BookstoreApplicationTests.java,b\f\bf17d049e2ddfe89bef37f80bf32623b7d1f74a3
