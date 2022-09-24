@@ -10,9 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "AUTHOR")
 public class Author extends Auditable {
@@ -29,4 +27,63 @@ public class Author extends Auditable {
 
     @OneToMany(mappedBy = "author", fetch = LAZY)
     private List<Books> books;
+
+    public Author() {
+    }
+
+    public Author(Long id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Author(Long id, String name, Integer age,
+        List<Books> books) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.books = books;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public List<Books> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Books> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+            "id = " + id + ", " +
+            "createdDate = " + createdDate + ", " +
+            "lastModifiedDate = " + lastModifiedDate + ", " +
+            "name = " + name + ", " +
+            "age = " + age + ")";
+    }
 }
