@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import com.felipemoreira.bookstore.domain.dto.AuthorDto;
 import com.felipemoreira.bookstore.services.AuthorService;
 import com.felipemoreira.bookstore.utils.AuthorsControllerDocs;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,5 +32,10 @@ public class AuthorController implements AuthorsControllerDocs {
     @GetMapping("/{id}")
     public AuthorDto findById(@PathVariable Long id) {
         return authorService.findById(id);
+    }
+
+    @GetMapping
+    public List<AuthorDto> findAll() {
+        return authorService.findAll();
     }
 }

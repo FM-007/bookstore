@@ -1,11 +1,14 @@
 package com.felipemoreira.bookstore.services;
 
+import static java.util.stream.Collectors.toList;
+
 import com.felipemoreira.bookstore.domain.dto.AuthorDto;
 import com.felipemoreira.bookstore.domain.exception.AuthorAlreadyExistsException;
 import com.felipemoreira.bookstore.domain.exception.AuthorNotFoundException;
 import com.felipemoreira.bookstore.domain.mappper.AuthorMapper;
 import com.felipemoreira.bookstore.entities.Author;
 import com.felipemoreira.bookstore.repositories.AuthorRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,13 @@ public class AuthorService {
             .orElseThrow(() -> new AuthorNotFoundException(id));
 
         return authorMapper.toDto(foundAuthor);
+    }
+
+    public List<AuthorDto> findAll() {
+        return authorRepository.findAll()
+            .stream()
+            .map(authorMapper::toDto)
+            .collect(toList());
     }
 
     private void verifyIfExists(String authorName) {

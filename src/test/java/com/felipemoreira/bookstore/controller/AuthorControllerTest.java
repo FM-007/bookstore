@@ -3,6 +3,7 @@ package com.felipemoreira.bookstore.controller;
 import static com.felipemoreira.bookstore.helper.AuthorHelper.authorCreated;
 import static com.felipemoreira.bookstore.utils.JsonConversionUtils.asJsonString;
 import static com.felipemoreira.bookstore.utils.constants.AuthorConstants.AUTHOR_URL;
+import static java.util.Collections.singletonList;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -83,5 +84,20 @@ public class AuthorControllerTest {
             .andExpect(jsonPath("$.id", is(authorDto.getId().intValue())))
             .andExpect(jsonPath("$.name", is(authorDto.getName())))
             .andExpect(jsonPath("$.age", is(authorDto.getAge())));
+    }
+
+    @Test
+    void testAuthorControllerFindAll() throws Exception {
+        AuthorDto authorDto = authorCreated();
+
+        when(authorService.findAll()).thenReturn(singletonList(authorDto));
+
+        mockMvc
+            .perform(MockMvcRequestBuilders.get(AUTHOR_URL)
+                .contentType(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].id", is(authorDto.getId().intValue())))
+            .andExpect(jsonPath("$[0].name", is(authorDto.getName())))
+            .andExpect(jsonPath("$[0].age", is(authorDto.getAge())));
     }
 }

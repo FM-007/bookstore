@@ -2,6 +2,8 @@ package com.felipemoreira.bookstore.services;
 
 import static com.felipemoreira.bookstore.helper.AuthorHelper.authorCreated;
 import static com.felipemoreira.bookstore.helper.AuthorHelper.authorCreatedEntity;
+import static java.util.Collections.EMPTY_LIST;
+import static java.util.Collections.singletonList;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,6 +19,7 @@ import com.felipemoreira.bookstore.domain.exception.AuthorNotFoundException;
 import com.felipemoreira.bookstore.domain.mappper.AuthorMapper;
 import com.felipemoreira.bookstore.entities.Author;
 import com.felipemoreira.bookstore.repositories.AuthorRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -89,5 +92,29 @@ public class AuthorServiceTest {
         when(authorRepository.findById(expectedFoundAuthorDto.getId())).thenReturn(empty());
 
         assertThrows(AuthorNotFoundException.class, () -> authorService.findById(expectedFoundAuthorDto.getId()));
+    }
+
+    @Test
+    void testFindAll() {
+        AuthorDto expectedFoundAuthorDto = authorCreated();
+        Author expectedFoundAuthor = authorCreatedEntity();
+
+        when(authorRepository.findAll()).thenReturn(singletonList(expectedFoundAuthor));
+        when(authorMapper.toDto(expectedFoundAuthor)).thenReturn(expectedFoundAuthorDto);
+
+        List<AuthorDto> foundAuthorsDto = authorService.findAll();
+
+        assertThat(foundAuthorsDto.size(), is(1));
+        assertThat(foundAuthorsDto.get(0), is(equalTo(expectedFoundAuthorDto)));
+    }
+
+    @Test
+    void testFindAll_EmptyList() {
+
+        when(authorRepository.findAll()).thenReturn(EMPTY_LIST);
+
+        List<AuthorDto> foundAuthorsDto = authorService.findAll();
+
+        assertThat(foundAuthorsDto.size(), is(0));
     }
 }
