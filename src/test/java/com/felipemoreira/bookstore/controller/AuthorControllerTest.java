@@ -5,6 +5,7 @@ import static com.felipemoreira.bookstore.utils.JsonConversionUtils.asJsonString
 import static com.felipemoreira.bookstore.utils.constants.AuthorConstants.AUTHOR_URL;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,8 +52,8 @@ public class AuthorControllerTest {
 
         mockMvc
             .perform(MockMvcRequestBuilders.post(AUTHOR_URL)
-            .contentType(APPLICATION_JSON)
-            .content(asJsonString(authorDto)))
+                .contentType(APPLICATION_JSON)
+                .content(asJsonString(authorDto)))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", is(authorDto.getId().intValue())))
             .andExpect(jsonPath("$.name", is(authorDto.getName())))
@@ -66,8 +67,8 @@ public class AuthorControllerTest {
 
         mockMvc
             .perform(MockMvcRequestBuilders.post(AUTHOR_URL)
-            .contentType(APPLICATION_JSON)
-            .content(asJsonString(authorDto)))
+                .contentType(APPLICATION_JSON)
+                .content(asJsonString(authorDto)))
             .andExpect(status().isBadRequest());
     }
 
@@ -99,5 +100,17 @@ public class AuthorControllerTest {
             .andExpect(jsonPath("$[0].id", is(authorDto.getId().intValue())))
             .andExpect(jsonPath("$[0].name", is(authorDto.getName())))
             .andExpect(jsonPath("$[0].age", is(authorDto.getAge())));
+    }
+
+    @Test
+    void testAuthorControllerDelete() throws Exception {
+        AuthorDto authorDto = authorCreated();
+
+        doNothing().when(authorService).delete(authorDto.getId());
+
+        mockMvc
+            .perform(MockMvcRequestBuilders.delete(AUTHOR_URL + "/" + authorDto.getId())
+                .contentType(APPLICATION_JSON))
+            .andExpect(status().isNoContent());
     }
 }
