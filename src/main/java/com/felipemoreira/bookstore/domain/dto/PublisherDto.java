@@ -3,6 +3,7 @@ package com.felipemoreira.bookstore.domain.dto;
 import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ public class PublisherDto {
 
     @NotNull
     @JsonFormat(shape = STRING, pattern = "dd/mm/yyyy")
-    private LocalDateTime foundationDate;
+    private LocalDate foundationDate;
 
     public Long getId() {
         return id;
@@ -50,11 +51,11 @@ public class PublisherDto {
         this.code = code;
     }
 
-    public LocalDateTime getFoundationDate() {
+    public LocalDate getFoundationDate() {
         return foundationDate;
     }
 
-    public void setFoundationDate(LocalDateTime foundationDate) {
+    public void setFoundationDate(LocalDate foundationDate) {
         this.foundationDate = foundationDate;
     }
 

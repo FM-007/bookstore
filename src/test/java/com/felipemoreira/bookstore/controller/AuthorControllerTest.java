@@ -2,7 +2,7 @@ package com.felipemoreira.bookstore.controller;
 
 import static com.felipemoreira.bookstore.helper.AuthorHelper.authorCreated;
 import static com.felipemoreira.bookstore.utils.JsonConversionUtils.asJsonString;
-import static com.felipemoreira.bookstore.utils.constants.AuthorConstants.AUTHOR_URL;
+import static com.felipemoreira.bookstore.utils.constants.BookstoreConstants.AUTHOR_URL;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.doNothing;

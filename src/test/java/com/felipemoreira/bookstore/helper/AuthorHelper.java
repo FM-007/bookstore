@@ -15,10 +15,6 @@ public class AuthorHelper {
         author.setId(1L);
         author.setName("Felipe Moreira");
         author.setAge(32);
-//        author.setBooks(bookList());
-//        LocalDateTime date = LocalDateTime.now();
-//        author.setCreatedDate(date);
-//        author.setLastModifiedDate(date);
 
         return author;
     }
@@ -30,26 +26,5 @@ public class AuthorHelper {
         authorDto.setAge(32);
 
         return authorDto;
-    }
-
-    public static List<Books> bookList() {
-        Author author = new Author();
-        Publisher publisher = new Publisher();
-        User user = new User();
-
-        List<Books> books = new ArrayList<>();
-        Books book = new Books();
-        book.setId(1L);
-        book.setBookName("Teste");
-        book.setIsbn("123456");
-        book.setPages(360);
-        book.setChapters(36);
-        book.setAuthor(author);
-        book.setPublisher(publisher);
-        book.setUser(user);
-
-        books.add(book);
-
-        return books;
     }
 }
