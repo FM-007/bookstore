@@ -1,4 +1,4 @@
-package com.felipemoreira.bookstore.utils;
+package com.felipemoreira.bookstore.controller.docs;
 
 import com.felipemoreira.bookstore.domain.dto.AuthorDto;
 import io.swagger.annotations.Api;
@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Api("Authors Management")
 public interface AuthorsControllerDocs {
@@ -29,4 +30,11 @@ public interface AuthorsControllerDocs {
         @ApiResponse(code = 200, message = "Return all registered author")
     })
     public List<AuthorDto> findAll();
+
+    @ApiOperation(value = "Delete author by id operation")
+    @ApiResponses(value = {
+        @ApiResponse(code = 204, message = "Success author deleted"),
+        @ApiResponse(code = 404, message = "Author not found error code")
+    })
+    void delete(@PathVariable Long id);
 }

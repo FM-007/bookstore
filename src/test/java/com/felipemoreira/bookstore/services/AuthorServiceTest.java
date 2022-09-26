@@ -11,6 +11,9 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.felipemoreira.bookstore.domain.dto.AuthorDto;
@@ -116,5 +119,29 @@ public class AuthorServiceTest {
         List<AuthorDto> foundAuthorsDto = authorService.findAll();
 
         assertThat(foundAuthorsDto.size(), is(0));
+    }
+
+    @Test
+    void testDelete() {
+        AuthorDto authorDto = authorCreated();
+        Author author = authorCreatedEntity();
+
+        Long authorId = authorDto.getId();
+        doNothing().when(authorRepository).deleteById(authorId);
+        when(authorRepository.findById(authorId)).thenReturn(of(author));
+
+        authorService.delete(authorId);
+
+        verify(authorRepository, times(1)).deleteById(authorId);
+        verify(authorRepository, times(1)).findById(authorId);
+    }
+
+    @Test
+    void testDelete_ExceptionInvalidID() {
+        var innvalidAuthorId = 2L;
+
+        when(authorRepository.findById(innvalidAuthorId)).thenReturn(empty());
+
+        assertThrows(AuthorNotFoundException.class, () -> authorService.delete(innvalidAuthorId));
     }
 }
