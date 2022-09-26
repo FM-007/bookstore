@@ -5,7 +5,7 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import com.felipemoreira.bookstore.domain.dto.AuthorDto;
 import com.felipemoreira.bookstore.services.AuthorService;
-import com.felipemoreira.bookstore.utils.AuthorsControllerDocs;
+import com.felipemoreira.bookstore.controller.docs.AuthorsControllerDocs;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

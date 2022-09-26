@@ -1,4 +1,4 @@
-package com.felipemoreira.bookstore.utils;
+package com.felipemoreira.bookstore.controller.docs;
 
 import com.felipemoreira.bookstore.domain.dto.AuthorDto;
 import io.swagger.annotations.Api;
