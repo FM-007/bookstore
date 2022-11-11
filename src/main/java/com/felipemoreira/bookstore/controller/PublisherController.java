@@ -8,6 +8,8 @@ import com.felipemoreira.bookstore.domain.dto.PublisherDto;
 import com.felipemoreira.bookstore.services.PublisherService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +27,10 @@ public class PublisherController implements PublisherControllerDocs {
     @ResponseStatus(CREATED)
     public PublisherDto create(@RequestBody @Valid PublisherDto publisherDto) {
         return publisherService.create(publisherDto);
+    }
+
+    @GetMapping("/{id}")
+    public PublisherDto findById(@PathVariable Long id) {
+        return publisherService.findById(id);
     }
 }
