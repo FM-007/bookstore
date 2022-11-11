@@ -24,7 +24,7 @@ public class PublisherDto {
     private String code;
 
     @NotNull
-    @JsonFormat(shape = STRING, pattern = "dd/mm/yyyy")
+    @JsonFormat(shape = STRING, pattern = "dd/MM/yyyy")
     private LocalDate foundationDate;
 
     public Long getId() {
