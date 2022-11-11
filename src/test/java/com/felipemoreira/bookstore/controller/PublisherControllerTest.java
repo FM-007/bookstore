@@ -6,6 +6,7 @@ import static com.felipemoreira.bookstore.utils.constants.BookstoreConstants.PUB
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -68,5 +69,20 @@ public class PublisherControllerTest {
                 .contentType(APPLICATION_JSON)
                 .content(asJsonString(publisherDto)))
             .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testPublisherControllerFindById() throws Exception {
+        PublisherDto publisherDto = createPublisherDto();
+
+        when(publisherService.findById(publisherDto.getId())).thenReturn(publisherDto);
+
+        mockMvc
+            .perform(get(PUBLISHER_URL + "/" + publisherDto.getId())
+                .contentType(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id", is(publisherDto.getId().intValue())))
+            .andExpect(jsonPath("$.name", is(publisherDto.getName())))
+            .andExpect(jsonPath("$.code", is(publisherDto.getCode())));
     }
 }

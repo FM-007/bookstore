@@ -2,6 +2,7 @@ package com.felipemoreira.bookstore.services;
 
 import com.felipemoreira.bookstore.domain.dto.PublisherDto;
 import com.felipemoreira.bookstore.domain.exception.PublisherAlreadyExistsException;
+import com.felipemoreira.bookstore.domain.exception.PublisherNotFoundException;
 import com.felipemoreira.bookstore.domain.mappper.PublisherMapper;
 import com.felipemoreira.bookstore.entities.Publisher;
 import com.felipemoreira.bookstore.repositories.PublisherRepository;
@@ -25,6 +26,12 @@ public class PublisherService {
         Publisher publisher = publisherRepository.save(publisherToCreate);
 
         return publisherMapper.toDto(publisher);
+    }
+
+    public PublisherDto findById(Long id) {
+        return publisherRepository.findById(id)
+            .map(publisherMapper::toDto)
+            .orElseThrow(() -> new PublisherNotFoundException(id));
     }
 
     private void verifyIfExistsPublisherByNameOrCode(String name, String code) {
