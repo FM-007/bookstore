@@ -16,9 +16,9 @@ import com.felipemoreira.bookstore.domain.exception.PublisherNotFoundException;
 import com.felipemoreira.bookstore.domain.mappper.PublisherMapper;
 import com.felipemoreira.bookstore.entities.Publisher;
 import com.felipemoreira.bookstore.repositories.PublisherRepository;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -91,5 +91,29 @@ public class PublisherServiceTest {
         when(publisherRepository.findById(publisherDto.getId())).thenReturn(empty());
 
         assertThrows(PublisherNotFoundException.class, () -> publisherService.findById(publisherDto.getId()));
+    }
+
+    @Test
+    void testPublisherFindAll() {
+        Publisher publisher = createPublisher();
+        PublisherDto publisherDto = createPublisherDto();
+
+        when(publisherRepository.findAll()).thenReturn(Collections.singletonList(publisher));
+        when(publisherMapper.toDto(publisher)).thenReturn(publisherDto);
+
+        List<PublisherDto> foundPublisherDto = publisherService.findAll();
+
+        assertThat(foundPublisherDto.size(), is(1));
+        assertThat(foundPublisherDto.get(0), is(equalTo(publisherDto)));
+    }
+
+    @Test
+    void testPublisherFindAll_EmptyList() {
+
+        when(publisherRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<PublisherDto> foundPublisherDto = publisherService.findAll();
+
+        assertThat(foundPublisherDto.size(), is(0));
     }
 }
