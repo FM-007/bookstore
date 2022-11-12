@@ -5,8 +5,10 @@ import static com.felipemoreira.bookstore.utils.JsonConversionUtils.asJsonString
 import static com.felipemoreira.bookstore.utils.constants.BookstoreConstants.PUBLISHER_URL;
 import static java.util.Collections.singletonList;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -101,5 +103,17 @@ public class PublisherControllerTest {
             .andExpect(jsonPath("$[0].id", is(publisherDto.getId().intValue())))
             .andExpect(jsonPath("$[0].name", is(publisherDto.getName())))
             .andExpect(jsonPath("$[0].code", is(publisherDto.getCode())));
+    }
+
+    @Test
+    void testPublisherControllerDelete() throws Exception {
+        PublisherDto publisherDto = createPublisherDto();
+
+        doNothing().when(publisherService).delete(publisherDto.getId());
+
+        mockMvc
+            .perform(delete(PUBLISHER_URL + "/" + publisherDto.getId())
+                .contentType(APPLICATION_JSON))
+            .andExpect(status().isNoContent());
     }
 }
