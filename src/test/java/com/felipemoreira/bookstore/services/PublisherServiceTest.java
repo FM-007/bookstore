@@ -8,6 +8,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.felipemoreira.bookstore.domain.dto.PublisherDto;
@@ -115,5 +118,28 @@ public class PublisherServiceTest {
         List<PublisherDto> foundPublisherDto = publisherService.findAll();
 
         assertThat(foundPublisherDto.size(), is(0));
+    }
+
+    @Test
+    void testPublisherDelete() {
+        Publisher publisher = createPublisher();
+        PublisherDto publisherDto = createPublisherDto();
+
+        when(publisherRepository.findById(publisherDto.getId())).thenReturn(of(publisher));
+        doNothing().when(publisherRepository).deleteById(publisherDto.getId());
+
+        publisherService.delete(publisherDto.getId());
+
+        verify(publisherRepository, times(1)).deleteById(publisherDto.getId());
+    }
+
+    @Test
+    void testPublisherDelete_Exception() {
+
+        var invalidPublisherId = 2L;
+
+        when(publisherRepository.findById(invalidPublisherId)).thenReturn(empty());
+
+        assertThrows(PublisherNotFoundException.class, () -> publisherService.delete(invalidPublisherId));
     }
 }
