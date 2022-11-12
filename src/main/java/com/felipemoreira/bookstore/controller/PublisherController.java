@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import com.felipemoreira.bookstore.controller.docs.PublisherControllerDocs;
 import com.felipemoreira.bookstore.domain.dto.PublisherDto;
 import com.felipemoreira.bookstore.services.PublisherService;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,5 +33,10 @@ public class PublisherController implements PublisherControllerDocs {
     @GetMapping("/{id}")
     public PublisherDto findById(@PathVariable Long id) {
         return publisherService.findById(id);
+    }
+
+    @GetMapping
+    public List<PublisherDto> findAll() {
+        return publisherService.findAll();
     }
 }

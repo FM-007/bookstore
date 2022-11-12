@@ -3,6 +3,7 @@ package com.felipemoreira.bookstore.controller;
 import static com.felipemoreira.bookstore.helper.PublisherHelper.createPublisherDto;
 import static com.felipemoreira.bookstore.utils.JsonConversionUtils.asJsonString;
 import static com.felipemoreira.bookstore.utils.constants.BookstoreConstants.PUBLISHER_URL;
+import static java.util.Collections.singletonList;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -13,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.felipemoreira.bookstore.domain.dto.PublisherDto;
 import com.felipemoreira.bookstore.services.PublisherService;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,5 +86,20 @@ public class PublisherControllerTest {
             .andExpect(jsonPath("$.id", is(publisherDto.getId().intValue())))
             .andExpect(jsonPath("$.name", is(publisherDto.getName())))
             .andExpect(jsonPath("$.code", is(publisherDto.getCode())));
+    }
+
+    @Test
+    void testPublisherControllerFindAll() throws Exception {
+        PublisherDto publisherDto = createPublisherDto();
+
+        when(publisherService.findAll()).thenReturn(singletonList(publisherDto));
+
+        mockMvc
+            .perform(get(PUBLISHER_URL)
+                .contentType(APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].id", is(publisherDto.getId().intValue())))
+            .andExpect(jsonPath("$[0].name", is(publisherDto.getName())))
+            .andExpect(jsonPath("$[0].code", is(publisherDto.getCode())));
     }
 }
