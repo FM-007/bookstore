@@ -1,5 +1,8 @@
 package com.felipemoreira.bookstore.domain.dto;
 
+import lombok.Builder;
+
+@Builder
 public class MessageDto {
 
     private String message;
