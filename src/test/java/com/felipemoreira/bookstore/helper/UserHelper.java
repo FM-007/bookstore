@@ -31,7 +31,7 @@ public class UserHelper {
         userDto.setAge(32);
         userDto.setGender(Gender.MALE);
         userDto.setEmail("felipe@test.com");
-        userDto.setUserName("FM");
+        userDto.setUsername("FM");
         userDto.setPassword("123456");
         LocalDate date = LocalDate.of(1991, 1, 16);
         userDto.setBirthdate(date);

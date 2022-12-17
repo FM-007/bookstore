@@ -37,7 +37,7 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
-    private String userName;
+    private String username;
 
     @NotNull
     @NotEmpty
@@ -51,13 +51,13 @@ public class UserDto {
     }
 
     public UserDto(Long id, String name, Integer age,
-        Gender gender, String email, String userName, String password, LocalDate birthdate) {
+        Gender gender, String email, String username, String password, LocalDate birthdate) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.email = email;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.birthdate = birthdate;
     }
@@ -102,12 +102,12 @@ public class UserDto {
         this.email = email;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -152,7 +152,7 @@ public class UserDto {
         if (!getEmail().equals(userDto.getEmail())) {
             return false;
         }
-        if (!getUserName().equals(userDto.getUserName())) {
+        if (!getUsername().equals(userDto.getUsername())) {
             return false;
         }
         if (!getPassword().equals(userDto.getPassword())) {
@@ -168,7 +168,7 @@ public class UserDto {
         result = 31 * result + getAge().hashCode();
         result = 31 * result + getGender().hashCode();
         result = 31 * result + getEmail().hashCode();
-        result = 31 * result + getUserName().hashCode();
+        result = 31 * result + getUsername().hashCode();
         result = 31 * result + getPassword().hashCode();
         result = 31 * result + getBirthdate().hashCode();
         return result;
@@ -182,7 +182,7 @@ public class UserDto {
             ", age=" + age +
             ", gender=" + gender +
             ", email='" + email + '\'' +
-            ", userName='" + userName + '\'' +
+            ", userName='" + username + '\'' +
             ", password='" + password + '\'' +
             ", birthdate=" + birthdate +
             '}';
